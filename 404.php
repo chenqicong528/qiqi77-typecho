@@ -13,7 +13,7 @@ $ctx = [
     'type'  => 'page',
     'title' => (string) \qiqi77\Options::get('qq_404_title'),
     'desc'  => '没有找到这个页面',
-    'url'   => rtrim((string) \Helper::options()->siteUrl, '/') . '/404',
+    'url'   => rtrim((string) \Helper::options()->siteUrl, '/') . \qiqi77\Options::here(),
 ];
 
 /* 随机几篇，供「摇一篇」使用 */
@@ -54,7 +54,7 @@ View::show('chrome/head', ['archive' => $this, 'ctx' => $ctx]);
 
       <div class="qq-404__actions">
         <a class="qq-btn qq-btn--accent" href="<?php echo Html::e(rtrim((string) \Helper::options()->siteUrl, '/')); ?>">回首页</a>
-        <a class="qq-btn qq-btn--ghost" href="<?php echo Html::e(\qiqi77\Options::url('/archive/')); ?>">看归档</a>
+        <a class="qq-btn qq-btn--ghost" href="<?php echo Html::e(\Typecho\Router::url('archive', [], (string) \Helper::options()->index)); ?>">看归档</a>
         <button type="button" class="qq-btn qq-btn--ghost" data-qq-shake>摇一篇</button>
       </div>
 

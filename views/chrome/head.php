@@ -97,7 +97,9 @@ $wmDark = $wmSvg($wmText, 'rgba(255,255,255,0.035)');
 <?php endforeach; ?>
 <link rel="canonical" href="<?php echo Html::e($canonical); ?>">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<?php if (is_file(__TYPECHO_ROOT_DIR__ . '/sitemap.xml')): ?>
 <link rel="sitemap" type="application/xml" href="<?php echo Html::e(Options::siteBase()); ?>/sitemap.xml">
+<?php endif; ?>
 <meta name="theme-color" content="#101216">
 <?php
 $fav = trim((string) Options::get('qq_favicon_url'));

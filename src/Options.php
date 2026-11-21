@@ -344,6 +344,26 @@ final class Options
         return $cache;
     }
 
+    /** 文章地址（跟随路由与伪静态） */
+    public static function postUrl(int $cid): string
+    {
+        try {
+            return (string) \Typecho\Router::url('post', ['cid' => $cid], (string) \Helper::options()->index);
+        } catch (\Throwable $e) {
+            return self::url('/archives/' . $cid . '/');
+        }
+    }
+
+    /** 分类地址 */
+    public static function catUrl(string $slug): string
+    {
+        try {
+            return (string) \Typecho\Router::url('category', ['slug' => $slug], (string) \Helper::options()->index);
+        } catch (\Throwable $e) {
+            return self::url('/category/' . rawurlencode($slug) . '/');
+        }
+    }
+
     public static function asset(string $path): string
     {
         $path = ltrim($path, '/');

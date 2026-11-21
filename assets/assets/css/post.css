@@ -1,0 +1,243 @@
+/* post.css — 文章页、列表头、数据页、友链、404 */
+
+.qq-archive-head { margin-bottom: 18px; }
+.qq-archive-head__label { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--qq-c-accent); }
+.qq-archive-head__title { margin-top: 6px; font-size: 26px; }
+.qq-archive-head__count { margin-top: 6px; font-size: 12.5px; color: var(--qq-c-text-3); }
+
+.qq-notice {
+  margin-bottom: 18px; padding: 12px 16px; border-radius: var(--qq-r-sm);
+  background: var(--qq-c-accent-soft); border: 1px solid color-mix(in srgb, var(--qq-c-accent) 24%, transparent);
+  font-size: 13px; color: var(--qq-c-text-2);
+}
+
+.qq-post {
+  background: var(--qq-c-surface); border: 1px solid var(--qq-c-line);
+  border-radius: var(--qq-r-lg); box-shadow: var(--qq-c-shadow);
+  padding: 30px clamp(18px, 4vw, 42px) 34px;
+}
+.qq-post__head { margin-bottom: 16px; }
+.qq-post__pin {
+  display: inline-block; margin-bottom: 10px; padding: 2px 10px; border-radius: 999px;
+  font-size: 11px; font-weight: 700; color: #fff; background: var(--qq-c-accent);
+}
+.qq-post__title { font-size: clamp(22px, 2.6vw, 30px); line-height: 1.28; letter-spacing: -.01em; }
+.qq-post__sub { margin-top: 8px; font-size: 14px; color: var(--qq-c-text-2); }
+.qq-post__meta {
+  margin-top: 12px; display: flex; flex-wrap: wrap; gap: 4px 14px;
+  font-size: 12px; color: var(--qq-c-text-3);
+}
+.qq-post__meta span::before { content: '·'; margin-right: 6px; opacity: .5; }
+.qq-post__hero { margin: 22px 0 0; border-radius: var(--qq-r-md); overflow: hidden; }
+.qq-post__hero img { width: 100%; max-height: 380px; object-fit: cover; }
+
+/* 正文 + 目录 */
+.qq-post__layout { display: grid; gap: 24px; margin-top: 18px; }
+@media (min-width: 1180px) {
+  .qq-post__layout { grid-template-columns: minmax(0, 1fr) 210px; }
+}
+
+.qq-post__body { min-width: 0; font-size: var(--qq-fs-body, 15.5px); line-height: var(--qq-lh-body, 1.92); color: var(--qq-c-text); }
+.qq-post__body > * + * { margin-top: 1em; }
+.qq-post__body h2, .qq-post__body h3 { position: relative; margin-top: 1.9em; padding-left: 12px; }
+.qq-post__body h2::before, .qq-post__body h3::before {
+  content: ''; position: absolute; left: 0; top: .22em; bottom: .22em; width: 4px;
+  border-radius: 99px; background: linear-gradient(180deg, #ff8fbc, var(--qq-c-accent));
+}
+.qq-post__body h2 { font-size: 21px; }
+.qq-post__body h3 { font-size: 17.5px; }
+.qq-post__body p { margin: 0; }
+.qq-post__body a { color: var(--qq-c-accent); border-bottom: 1px solid color-mix(in srgb, var(--qq-c-accent) 35%, transparent); }
+.qq-post__body a:hover { border-bottom-color: var(--qq-c-accent); }
+.qq-post__body img { border-radius: var(--qq-r-sm); margin: 1em auto; }
+.qq-post__body blockquote {
+  margin: 1.2em 0; padding: 12px 18px; border-left: 3px solid var(--qq-c-accent);
+  background: var(--qq-c-surface-2); border-radius: 0 var(--qq-r-sm) var(--qq-r-sm) 0;
+  color: var(--qq-c-text-2); font-size: 14.5px;
+}
+.qq-post__body ul, .qq-post__body ol { padding-left: 1.4em; }
+.qq-post__body ul { list-style: disc; }
+.qq-post__body ol { list-style: decimal; }
+.qq-post__body li { margin: .35em 0; }
+.qq-post__body table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.qq-post__body th, .qq-post__body td { padding: 8px 12px; border: 1px solid var(--qq-c-line); }
+.qq-post__body th { background: var(--qq-c-surface-2); text-align: left; }
+.qq-post__body hr { border: 0; border-top: 1px solid var(--qq-c-line); margin: 2em 0; }
+
+/* 代码块 */
+.qq-post__body pre {
+  position: relative; margin: 1.3em 0; padding: 34px 16px 16px;
+  border-radius: var(--qq-r-md); background: #1c2128; overflow: auto;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .04);
+}
+.qq-post__body pre code { font-family: var(--qq-mono); font-size: 13px; line-height: 1.7; color: #d7dde7; background: none; padding: 0; }
+.qq-post__body :not(pre) > code {
+  padding: 2px 6px; border-radius: 5px; font-family: var(--qq-mono); font-size: .88em;
+  background: var(--qq-c-accent-soft); color: var(--qq-c-accent);
+}
+.qq-code__lang {
+  position: absolute; left: 14px; top: 10px; font: 11px var(--qq-mono);
+  color: #7d8794; text-transform: uppercase; letter-spacing: .06em;
+}
+.qq-code__copy {
+  position: absolute; right: 10px; top: 8px; padding: 3px 10px;
+  border-radius: 6px; border: 1px solid rgba(255, 255, 255, .12);
+  background: rgba(255, 255, 255, .06); color: #aab4c2; font-size: 11.5px;
+  transition: all .2s;
+}
+.qq-code__copy:hover { background: rgba(255, 255, 255, .14); color: #fff; }
+
+/* 目录 */
+.qq-post__toc { display: none; }
+@media (min-width: 1180px) {
+  .qq-post__toc { display: block; position: sticky; top: calc(var(--qq-topbar-h) + 18px); align-self: start; }
+}
+.qq-post__toc-title { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--qq-c-text-3); margin-bottom: 8px; }
+.qq-post__toc .toc-list { font-size: 12.5px; line-height: 1.9; }
+.qq-post__toc .toc-link { color: var(--qq-c-text-2); display: block; padding: 2px 0; border-left: 2px solid transparent; padding-left: 10px; }
+.qq-post__toc .toc-link:hover { color: var(--qq-c-accent); }
+.qq-post__toc .is-active-link { color: var(--qq-c-accent); border-left-color: var(--qq-c-accent); font-weight: 600; }
+
+/* 版权 / 打赏 / 上下篇 */
+.qq-copyright {
+  margin-top: 30px; padding: 16px 18px; border-radius: var(--qq-r-md);
+  background: var(--qq-c-surface-2); border: 1px dashed var(--qq-c-line);
+  display: grid; gap: 4px; font-size: 12.5px; color: var(--qq-c-text-2);
+}
+.qq-copyright b { display: inline-block; width: 42px; color: var(--qq-c-text-3); font-weight: 500; }
+.qq-copyright a { color: var(--qq-c-accent); word-break: break-all; }
+
+.qq-reward { display: grid; place-items: center; margin: 26px 0 6px; }
+
+.qq-pager { margin-top: 28px; display: grid; gap: 10px; grid-template-columns: 1fr; }
+@media (min-width: 720px) { .qq-pager { grid-template-columns: 1fr 1fr; } }
+.qq-pager__item {
+  padding: 12px 14px; border-radius: var(--qq-r-sm); background: var(--qq-c-surface-2);
+  border: 1px solid var(--qq-c-line); font-size: 13px; color: var(--qq-c-text-2);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.qq-pager__item a { display: block; overflow: hidden; text-overflow: ellipsis; }
+.qq-pager__item a:hover { color: var(--qq-c-accent); }
+.qq-pager__item--next { text-align: right; }
+
+/* 阅读进度：顶部细条 + 右上角百分比胶囊 */
+.qq-reading-pct {
+  position: fixed; right: 18px; top: calc(var(--qq-topbar-h) + 12px); z-index: 899;
+  display: flex; align-items: baseline; gap: 1px;
+  min-width: 52px; padding: 5px 11px 6px;
+  border-radius: 999px; font-size: 11px;
+  color: var(--qq-c-text-2); background: color-mix(in srgb, var(--qq-c-surface) 88%, transparent);
+  border: 1px solid var(--qq-c-line);
+  box-shadow: 0 4px 14px rgba(16, 20, 30, .10);
+  backdrop-filter: blur(8px);
+  opacity: 0; transform: translateY(-6px); pointer-events: none;
+  transition: opacity .25s, transform .25s, background .25s, color .25s;
+}
+.qq-reading-pct b { font-size: 15px; font-weight: 700; color: var(--qq-c-text); font-variant-numeric: tabular-nums; }
+.qq-reading-pct.is-on { opacity: 1; transform: none; }
+.qq-reading-pct.is-done { color: #fff; background: #2ecc71; border-color: transparent; }
+.qq-reading-pct.is-done b { color: #fff; }
+@media (max-width: 600px) {
+  /* 右下角有三个浮动件：↑(24) / 目录(78) / 阅读百分比(132)，别叠在一起 */
+  .qq-reading-pct { top: auto; bottom: 132px; right: 16px; }
+}
+
+/* 文章头：标题区与封面并排，封面压小 */
+.qq-post__head { display: block; }
+.qq-post__head--split {
+  display: grid; grid-template-columns: minmax(0, 1fr) 176px;
+  gap: 20px; align-items: start;
+}
+.qq-post__headtext { min-width: 0; }
+.qq-post__thumb {
+  margin: 4px 0 0; border-radius: var(--qq-r-md); overflow: hidden;
+  aspect-ratio: 4 / 3; background: var(--qq-c-surface-2);
+  box-shadow: var(--qq-c-shadow);
+}
+.qq-post__thumb img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .4s var(--qq-ease);
+}
+.qq-post__thumb:hover img { transform: scale(1.04); }
+
+@media (max-width: 720px) {
+  .qq-post__head--split { grid-template-columns: 1fr; gap: 12px; }
+  .qq-post__thumb { aspect-ratio: 16 / 9; max-height: 180px; order: -1; }
+}
+
+/* 代码块：不换行，窄屏横向滚动 */
+.qq-post__body pre { white-space: pre; tab-size: 4; -webkit-overflow-scrolling: touch; }
+.qq-post__body pre code { white-space: pre; }
+.qq-post__body pre::-webkit-scrollbar { height: 6px; }
+.qq-post__body pre::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .22); border-radius: 99px; }
+.qq-post__body pre::-webkit-scrollbar-track { background: transparent; }
+
+/* 正文图片：可点击放大 */
+.qq-post__body img { cursor: zoom-in; }
+
+/* 原生灯箱 */
+.qq-zoom {
+  position: fixed; inset: 0; z-index: 9000; display: grid; place-items: center;
+  background: rgba(8, 10, 14, .92); opacity: 0; visibility: hidden;
+  transition: opacity .22s ease, visibility .22s ease;
+  padding: 24px;
+}
+.qq-zoom.is-open { opacity: 1; visibility: visible; }
+.qq-zoom img {
+  max-width: 96vw; max-height: 92vh; border-radius: 8px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .5);
+  transform: scale(.94); transition: transform .22s var(--qq-ease);
+  cursor: zoom-out;
+}
+.qq-zoom.is-open img { transform: none; }
+.qq-zoom__close {
+  position: absolute; right: 18px; top: 16px; width: 38px; height: 38px;
+  border-radius: 50%; border: 0; background: rgba(255, 255, 255, .14); color: #fff;
+  font-size: 20px; line-height: 1; cursor: pointer;
+}
+.qq-zoom__close:hover { background: rgba(255, 255, 255, .26); }
+
+/* 超长代码块：默认折叠，展开后可上下滚动 */
+.qq-post__body pre.qq-code--tall {
+  /* 折叠时仍可横向滚动，只裁纵向 */
+  max-height: 420px; overflow-x: auto; overflow-y: hidden; padding-bottom: 46px;
+}
+.qq-post__body pre.qq-code--tall::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 44px; height: 90px;
+  background: linear-gradient(180deg, rgba(28, 33, 40, 0), #1c2128 82%);
+  pointer-events: none;
+}
+.qq-post__body pre.qq-code--tall.is-open {
+  max-height: 72vh; overflow: auto; padding-bottom: 16px;
+}
+.qq-post__body pre.qq-code--tall.is-open::after { content: none; }
+
+.qq-code__fold {
+  position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%);
+  z-index: 2; padding: 4px 16px; border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .16); background: rgba(255, 255, 255, .1);
+  color: #cdd6e2; font-size: 11.5px; cursor: pointer; backdrop-filter: blur(4px);
+  transition: background .2s, color .2s;
+}
+.qq-code__fold:hover { background: var(--qq-c-accent); color: #fff; border-color: transparent; }
+.qq-post__body pre.is-open .qq-code__fold { position: sticky; left: 50%; bottom: 4px; display: inline-block; }
+
+/* 移动端：长 URL / 长英文串不能把布局撑宽（撑宽后 innerWidth 变大，右侧固定元素会被推出屏幕） */
+.qq-post__body { overflow-wrap: anywhere; }
+.qq-post__body a { word-break: break-all; }
+.qq-post__body p,
+.qq-post__body li,
+.qq-post__body blockquote,
+.qq-post__body td { min-width: 0; }
+
+/* 代码块与表格自己横向滚动，不参与撑宽 */
+.qq-post__body pre { max-width: 100%; overflow-x: auto; }
+.qq-post__body table { display: block; max-width: 100%; overflow-x: auto; }
+
+/* 兜底：任何元素都不许突破内容宽度 */
+.qq-post { max-width: 100%; overflow-x: clip; }
+
+/* 目录浮层打开时别盖住百分比胶囊 */
+@media (max-width: 1179px) {
+  .qq-post__toc.is-open { inset: auto 12px 178px 12px; }
+}

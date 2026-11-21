@@ -115,7 +115,7 @@ $ownerAvatar = \qiqi77\Comment\Avatar::resolve('', $ownerMail, (string) \Helper:
     </div>
     <div class="qq-cloud">
       <?php foreach ($cats as $cat): ?>
-      <a href="<?php echo Html::e(\qiqi77\Options::url('/category/' . rawurlencode((string) $cat['slug']) . '/')); ?>" class="qq-side__cat"><?php echo Html::e((string) $cat['name']); ?><em><?php echo (int) $cat['count']; ?></em></a>
+      <a href="<?php echo Html::e(\qiqi77\Options::catUrl((string) $cat['slug'])); ?>" class="qq-side__cat"><?php echo Html::e((string) $cat['name']); ?><em><?php echo (int) $cat['count']; ?></em></a>
       <?php endforeach; ?>
     </div>
     <div class="qq-online">
@@ -139,7 +139,7 @@ $ownerAvatar = \qiqi77\Comment\Avatar::resolve('', $ownerMail, (string) \Helper:
     <ul class="qq-recent">
       <?php foreach ($recent as $one): ?>
       <li>
-        <a href="<?php echo Html::e(\qiqi77\Options::url('/' . (int) $one['cid'])); ?>#comment-<?php echo (int) $one['coid']; ?>">
+        <a href="<?php echo Html::e(\qiqi77\Options::postUrl((int) $one['cid'])); ?>#comment-<?php echo (int) $one['coid']; ?>">
           <b><?php echo Html::e((string) $one['author']); ?></b>：<?php echo Html::e(\qiqi77\Support\Str::clip(\qiqi77\Support\Str::plain((string) $one['text']), 36)); ?>
         </a>
       </li>
