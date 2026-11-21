@@ -1,0 +1,260 @@
+/* admin.css — 主题设置页（只作用于 .qq-set 与引导卡，不污染 Typecho 后台其他页面） */
+
+.qq-set__hero {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 18px;
+  margin: 0 0 18px;
+  padding: 20px 22px;
+  border: 1px solid #e4e8f2;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f7f9ff 0%, #ffffff 58%);
+}
+.qq-set__hero-main h2 { margin: 0 0 6px; font-size: 18px; color: #1d2333; }
+.qq-set__hero-main p { margin: 0; font-size: 13px; line-height: 1.7; color: #66708a; }
+.qq-set__steps { margin: 12px 0 0; padding-left: 18px; font-size: 12.5px; line-height: 1.9; color: #4d5670; }
+.qq-set__steps b { color: #1d2333; font-weight: 600; }
+.qq-set__hero-side { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; flex: 0 0 auto; }
+.qq-set__badge {
+  padding: 3px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 600;
+  color: #fff; background: #4f6ef7; white-space: nowrap;
+}
+.qq-set__badge--ghost { color: #5b6478; background: #eef1f8; }
+
+/* ---------- 两栏布局 ---------- */
+.qq-set {
+  display: grid;
+  grid-template-columns: 216px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  margin: 0;
+}
+.qq-set__nav {
+  position: sticky; top: 76px;
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 12px;
+  border: 1px solid #e4e8f2; border-radius: 14px; background: #fff;
+}
+.qq-set__search {
+  width: 100%; box-sizing: border-box;
+  margin: 0 0 8px; padding: 8px 10px;
+  border: 1px solid #dfe4ef; border-radius: 9px;
+  font-size: 13px; color: #1d2333; background: #fafbff;
+}
+.qq-set__search:focus { outline: 2px solid #4f6ef733; border-color: #4f6ef7; }
+.qq-set__tab {
+  display: flex; align-items: center; gap: 8px;
+  width: 100%; padding: 9px 10px;
+  border: 0; border-radius: 9px; background: transparent;
+  font-size: 13px; color: #4d5670; text-align: left; cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.qq-set__tab em { font-style: normal; font-size: 11px; color: #9aa3b8; margin-left: auto; }
+.qq-set__tab:hover { background: #f4f6fc; color: #1d2333; }
+.qq-set__tab.is-on { background: #eef2ff; color: #3350d6; font-weight: 600; }
+.qq-set__tab.is-on em { color: #6d7ff0; }
+
+.qq-set__body { display: grid; gap: 16px; min-width: 0; }
+
+.qq-set__card {
+  padding: 4px 20px 8px;
+  border: 1px solid #e4e8f2; border-radius: 16px; background: #fff;
+  scroll-margin-top: 90px;
+}
+.qq-set__head { padding: 16px 0 4px; }
+.qq-set__head h3 { margin: 0; font-size: 15px; color: #1d2333; }
+.qq-set__head p { margin: 4px 0 0; font-size: 12.5px; color: #7b849b; }
+
+/* ---------- 单个设置项 ---------- */
+.qq-set .typecho-option {
+  margin: 0; padding: 15px 0;
+  border-top: 1px solid #f1f3f9;
+  list-style: none;
+}
+.qq-set .typecho-option > li {
+  display: grid; grid-template-columns: 186px minmax(0, 1fr);
+  gap: 0 18px; align-items: start;
+}
+.qq-set .typecho-label {
+  grid-column: 1;
+  margin: 0; padding-top: 8px;
+  font-size: 13px; font-weight: 600; color: #2b3242; line-height: 1.4;
+}
+
+/* 右侧控件列：垂直排列，顺序就是 DOM 顺序 */
+.qq-set .qq-field {
+  grid-column: 2;
+  display: flex; flex-direction: column; align-items: stretch; gap: 8px;
+  min-width: 0;
+}
+.qq-set .qq-field > input[type="text"],
+.qq-set .qq-field > input[type="url"],
+.qq-set .qq-field > input[type="number"],
+.qq-set .qq-field > select,
+.qq-set .qq-field > textarea,
+.qq-set .qq-social__row input[type="text"] {
+  width: 100%; max-width: 560px; box-sizing: border-box;
+  padding: 8px 11px;
+  border: 1px solid #dfe4ef; border-radius: 9px;
+  font-size: 13px; color: #1d2333; background: #fff;
+  transition: border-color .15s, box-shadow .15s;
+}
+.qq-set .qq-field > textarea { min-height: 84px; line-height: 1.6; resize: vertical; }
+.qq-set .qq-field > input:focus,
+.qq-set .qq-field > select:focus,
+.qq-set .qq-field > textarea:focus {
+  outline: 0; border-color: #4f6ef7; box-shadow: 0 0 0 3px #4f6ef71f;
+}
+.qq-set .qq-field > .description {
+  margin: 0; font-size: 12px; line-height: 1.6; color: #8a92a6;
+}
+
+/* 字段尾部的「默认值 / 恢复」 */
+.qq-set .qq-row__foot {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  font-size: 11.5px; color: #9aa3b8;
+}
+.qq-set .qq-row__def { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 420px; }
+.qq-set .qq-row__reset {
+  border: 0; background: transparent; padding: 0;
+  font-size: 11.5px; color: #4f6ef7; cursor: pointer;
+}
+.qq-set .qq-row__reset:hover { text-decoration: underline; }
+.qq-set .qq-row__reset[hidden] { display: none; }
+
+/* 滑块 */
+.qq-set .qq-range { display: flex; align-items: center; gap: 12px; max-width: 560px; }
+.qq-set .qq-range input[type="range"] { flex: 1; accent-color: #4f6ef7; }
+.qq-set .qq-range__val {
+  min-width: 62px; text-align: center;
+  padding: 3px 8px; border-radius: 7px;
+  background: #f2f5ff; color: #3350d6; font-size: 12px; font-variant-numeric: tabular-nums;
+}
+
+/* 开关 */
+.qq-set .qq-sw {
+  position: relative; width: 46px; height: 26px; padding: 0; flex: 0 0 auto;
+  border: 0; border-radius: 999px; background: #d8dded; cursor: pointer;
+  transition: background .2s;
+}
+.qq-set .qq-sw i {
+  position: absolute; top: 3px; left: 3px; width: 20px; height: 20px;
+  border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(20, 28, 48, .22);
+  transition: transform .2s;
+}
+.qq-set .qq-sw.is-on { background: #4f6ef7; }
+.qq-set .qq-sw.is-on i { transform: translateX(20px); }
+
+/* 取色 */
+.qq-set .qq-color {
+  width: 46px; height: 34px; padding: 2px; flex: 0 0 auto;
+  border: 1px solid #dfe4ef; border-radius: 9px; background: #fff; cursor: pointer;
+}
+
+/* 图片预览 */
+.qq-set .qq-preview { display: flex; align-items: center; gap: 12px; font-size: 12px; color: #8a92a6; }
+.qq-set .qq-preview img {
+  width: 74px; height: 52px; object-fit: cover;
+  border: 1px solid #e4e8f2; border-radius: 8px; background: #f7f9ff;
+}
+.qq-set .qq-preview img[hidden] { display: none; }
+
+.qq-set .qq-hidden-input { position: absolute !important; opacity: 0; pointer-events: none; height: 0; width: 0; overflow: hidden; }
+
+/* 社交编辑 */
+.qq-set .qq-social {
+  display: grid; gap: 8px;
+  padding: 12px; border: 1px dashed #dfe4ef; border-radius: 11px; background: #fbfcff;
+}
+.qq-set .qq-social__row { display: grid; grid-template-columns: auto 84px minmax(0, 1fr); align-items: center; gap: 10px; font-size: 12.5px; }
+.qq-set .qq-social__name { color: #4d5670; }
+.qq-set .qq-social__tip { margin: 2px 0 0; font-size: 11.5px; color: #9aa3b8; }
+
+/* ---------- 保存条 ---------- */
+.qq-set__save {
+  position: sticky; bottom: 0; z-index: 5;
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  margin: 18px 0 0; padding: 12px 18px;
+  border: 1px solid #e4e8f2; border-radius: 14px;
+  background: rgba(255, 255, 255, .92); backdrop-filter: blur(10px);
+  box-shadow: 0 -6px 24px rgba(23, 32, 56, .06);
+}
+.qq-set__save button[type="submit"] {
+  padding: 9px 22px; border: 0; border-radius: 10px;
+  font-size: 13.5px; font-weight: 600; color: #fff; background: #4f6ef7; cursor: pointer;
+}
+.qq-set__save button[type="submit"]:hover { background: #3f5ce4; }
+.qq-set__save .qq-set__hint { font-size: 12px; color: #8a92a6; }
+
+/* 窄屏 */
+@media (max-width: 900px) {
+  .qq-set { grid-template-columns: minmax(0, 1fr); }
+  .qq-set__nav { position: static; flex-direction: row; overflow-x: auto; }
+  .qq-set__search { display: none; }
+  .qq-set .typecho-option > li { grid-template-columns: minmax(0, 1fr); }
+  .qq-set .typecho-label,
+  .qq-set .typecho-option .description,
+  .qq-set .qq-row__foot,
+  .qq-set .qq-range,
+  .qq-set .qq-sw,
+  .qq-set .qq-color,
+  .qq-set .qq-preview,
+  .qq-set .qq-social { grid-column: 1; }
+}
+
+/* 被可视化面板替代的原始字段整行隐藏 */
+.qq-set .qq-row--hidden { display: none !important; }
+
+/* 每组第一项不要顶部分隔线 */
+.qq-set__card .typecho-option:first-of-type { border-top: 0; }
+
+/* 宽屏下社交面板两列，避免十条拉太长 */
+@media (min-width: 1100px) {
+  .qq-set .qq-social { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .qq-set .qq-social__tip { grid-column: 1 / -1; }
+}
+
+/* 社交面板标题 */
+.qq-set .qq-social__head { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 2px; }
+.qq-set .qq-social__head b { font-size: 13px; color: #2b3242; }
+.qq-set .qq-social__head span { font-size: 11.5px; color: #9aa3b8; }
+
+/* 主题色：色块与文本框同一行 */
+.qq-set .qq-color-row { display: flex; align-items: center; gap: 10px; }
+.qq-set .qq-color-row > input[type="text"] { flex: 1; max-width: 520px; }
+
+/* ---------- 配置备份条 ---------- */
+.qq-bk {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin: 0 0 18px; padding: 14px 18px;
+  border: 1px solid #e4e8f2; border-radius: 14px; background: #fff;
+}
+.qq-bk__title { font-size: 13px; font-weight: 600; color: #2b3242; }
+.qq-bk__note { font-size: 12px; color: #2e9e6b; }
+.qq-bk__btns { display: flex; gap: 8px; margin-left: auto; flex-wrap: wrap; }
+.qq-bk-btn {
+  padding: 6px 14px; border-radius: 8px;
+  border: 1px solid #dfe4ef; background: #fff;
+  font-size: 12.5px; color: #4d5670; text-decoration: none; white-space: nowrap;
+  transition: all .15s;
+}
+.qq-bk-btn:hover { border-color: #4f6ef7; color: #3350d6; }
+.qq-bk-btn.is-primary { background: #4f6ef7; border-color: #4f6ef7; color: #fff; }
+.qq-bk-btn.is-primary:hover { background: #3f5ce4; color: #fff; }
+.qq-bk-btn.is-danger { color: #d64550; border-color: #f3d0d4; }
+.qq-bk-btn.is-danger:hover { background: #fff5f6; }
+
+/* 收录面板：多行结构 */
+.qq-bk--search { flex-direction: column; align-items: stretch; gap: 10px; }
+.qq-bk__row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.qq-bk__url {
+  flex: 1 1 320px; min-width: 0;
+  padding: 6px 10px; border-radius: 8px;
+  background: #f5f7fd; border: 1px solid #e4e8f2;
+  font: 12px/1.5 ui-monospace, Consolas, monospace; color: #3350d6;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.qq-bk__tag {
+  padding: 2px 9px; border-radius: 999px;
+  background: #eef1f8; color: #5b6478; font-size: 11.5px; white-space: nowrap;
+}
+.qq-bk__row .qq-bk__note { font-size: 12px; color: #8a92a6; }
+.qq-bk__row .qq-bk__btns { margin-left: auto; }
