@@ -718,7 +718,7 @@
       fn();
     } catch (err) {
       // 单个初始化失败不能拖垮整页
-      if (window.console && console.warn) console.warn('[lingxi] init failed:', key, err);
+      if (window.console && console.warn) console.warn('[qiqi77] init failed:', key, err);
     }
   }
   /* ---------------- 代码块：超长折叠 + 展开后可滚动 ---------------- */
@@ -823,7 +823,7 @@
   }
   function guard(name, fn) {
     try { fn(); } catch (err) {
-      if (window.console && console.warn) console.warn('[lingxi]', name, err);
+      if (window.console && console.warn) console.warn('[qiqi77]', name, err);
     }
   }
 

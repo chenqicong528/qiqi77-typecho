@@ -12,7 +12,7 @@ use Typecho\Db;
 
 final class Metrics
 {
-    private const SEEN_COOKIE = 'lingxi_seen';
+    private const SEEN_COOKIE = 'qiqi77_seen';
 
     public function __construct(private Db $db)
     {

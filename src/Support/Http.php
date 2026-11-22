@@ -63,7 +63,7 @@ final class Http
     private static function cachePath(string $url): string
     {
         if (self::$cacheDir === '') {
-            self::$cacheDir = rtrim(sys_get_temp_dir(), '/\\') . '/lingxi-cache';
+            self::$cacheDir = rtrim(sys_get_temp_dir(), '/\\') . '/qiqi77-cache';
             if (!is_dir(self::$cacheDir)) {
                 @mkdir(self::$cacheDir, 0700, true);
             }
