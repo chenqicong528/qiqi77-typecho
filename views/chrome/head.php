@@ -279,8 +279,8 @@ if ($fav === '') {
     <button class="qq-iconbtn" type="button" data-qq-drawer aria-label="打开菜单">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
-    <a class="qq-brand" href="<?php echo Html::e(Options::siteBase()); ?>"><?php echo Html::e($brandTitle); ?></a>
-    <form class="qq-search" role="search" action="<?php echo Html::e(Options::siteBase()); ?>" method="get">
+    <a class="qq-brand" href="<?php echo Html::e(Options::url('/')); ?>"><?php echo Html::e($brandTitle); ?></a>
+    <form class="qq-search" role="search" action="<?php echo Html::e(Options::url('/')); ?>" method="get">
       <input type="search" name="s" placeholder="<?php echo Html::e((string) Options::get('qq_search_ph', '搜索一下…')); ?>" aria-label="站内搜索" autocomplete="off">
       <button type="submit" class="qq-iconbtn" aria-label="搜索">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
