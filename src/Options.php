@@ -81,6 +81,7 @@ final class Options
         'qq_favicon_url'       => ['text', '站点图标', '', '支持绝对地址', [], 'basic'],
         'qq_copyright_text'    => ['text', '版权文案', 'All Rights Reserved', '支持 {year} {site} {name}', [], 'basic'],
         'qq_footer_note'       => ['text', '页脚说明', '', '显示在页脚顶部', [], 'basic'],
+        'qq_uptime_since'      => ['text', '建站日期', '', '侧栏「本站已硬撑」的起算日，留空不显示', [], 'basic'],
         'qq_icp_number'        => ['text', 'ICP 备案号', '', '页脚展示并链接到工信部', [], 'basic'],
         'qq_police_number'     => ['text', '公安备案号', '', '例如 粤公网安备 440xxxxxxx 号', [], 'basic'],
         'qq_moe_number'        => ['text', '萌 ICP 备案号', '', '留空不显示', [], 'basic'],

@@ -84,6 +84,16 @@ try {
 } catch (\Throwable $e) {
 }
 $ownerAvatar = \qiqi77\Comment\Avatar::resolve('', $ownerMail, (string) \Helper::options()->title);
+/* 运行天数：服务端先算好，JS 只负责继续走 */
+$since = trim((string) Options::get('qq_uptime_since'));
+$sinceTs = $since !== '' ? strtotime($since) : false;
+if (!$sinceTs || $sinceTs > time()) {
+    $sinceTs = 0;
+} else {
+    $upDays = max(0, (int) floor((time() - $sinceTs) / 86400));
+    $upYears = intdiv($upDays, 365);
+    $upRest = $upDays - $upYears * 365;
+}
 ?>
   <section class="qq-card-info">
     <?php $cover = trim((string) Options::get('qq_sidebar_cover')); ?>
@@ -101,6 +111,9 @@ $ownerAvatar = \qiqi77\Comment\Avatar::resolve('', $ownerMail, (string) \Helper:
     <h4 class="qq-module__title">欢迎！</h4>
     <div class="qq-module__welcome">
       <p>你是第 <?php echo number_format(max(1, $totalViews)); ?> 位相遇的小伙伴</p>
+      <?php if ($sinceTs > 0): ?>
+      <p class="qq-uptime" data-qq-since="<?php echo (int) $sinceTs; ?>">本站已硬撑 <b><?php echo $upYears; ?></b> 年 <b><?php echo $upRest; ?></b> 天</p>
+      <?php endif; ?>
     </div>
   </section>
 
