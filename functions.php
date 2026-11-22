@@ -19,6 +19,7 @@ function themeConfig($form)
     \qiqi77\Options::form($form);
 
     // 设置页增强：卡片化 + 锚点导航
+    echo \qiqi77\Options::linkPanel();
     echo \qiqi77\Options::searchPanel();
     echo \qiqi77\Options::backupPanel();
     echo '<link rel="stylesheet" href="' . \qiqi77\Options::asset('css/admin.css') . '">';

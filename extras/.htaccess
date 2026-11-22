@@ -1,0 +1,15 @@
+# qiqi77 / Typecho 伪静态（Apache）
+# 放到站点根目录；装在子目录时，把 RewriteBase 改成 /子目录/
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>
+
+# 让 Apache 把 index.php/archives/1/ 里的 /archives/1/ 传给 PHP
+<IfModule mod_php.c>
+    AcceptPathInfo On
+</IfModule>

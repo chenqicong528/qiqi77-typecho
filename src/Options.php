@@ -389,6 +389,75 @@ final class Options
         return $cache;
     }
 
+    /** 连接诊断面板：告诉你这台机器该贴哪段配置 */
+    public static function linkPanel(): string
+    {
+        $server = strtolower((string) ($_SERVER['SERVER_SOFTWARE'] ?? ''));
+        if (strpos($server, 'nginx') !== false) {
+            $kind = 'nginx';
+        } elseif (strpos($server, 'apache') !== false) {
+            $kind = 'apache';
+        } elseif (strpos($server, 'kangle') !== false) {
+            $kind = 'kangle';
+        } else {
+            $kind = '其他';
+        }
+
+        $base = self::siteBase();                 // '' 或 /blog
+        $dir = $base === '' ? '/' : $base . '/';
+        $rewrite = !empty(\Helper::options()->rewrite);
+        $pathInfo = isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] !== '';
+
+        $nginx = "location {$dir} {\n"
+            . "    try_files \$uri \$uri/ {$base}/index.php\$uri;\n"
+            . "}\n\n"
+            . "location ~ \\.php(/|$) {\n"
+            . "    fastcgi_pass   127.0.0.1:9000;      # 按面板实际端口改\n"
+            . "    fastcgi_index  index.php;\n"
+            . "    fastcgi_split_path_info ^(.+\\.php)(/.*)$;\n"
+            . "    fastcgi_param  PATH_INFO \$fastcgi_path_info;\n"
+            . "    fastcgi_param  SCRIPT_FILENAME \$document_root\$fastcgi_script_name;\n"
+            . "    include        fastcgi_params;\n"
+            . "}";
+
+        $apache = "RewriteEngine On\n"
+            . "RewriteBase {$dir}\n"
+            . "RewriteCond %{REQUEST_FILENAME} !-f\n"
+            . "RewriteCond %{REQUEST_FILENAME} !-d\n"
+            . "RewriteRule ^(.*)$ index.php/\$1 [L]";
+
+        $rows = [
+            ['Web 服务器', $kind . ($server !== '' ? '（' . htmlspecialchars($server, ENT_QUOTES) . '）' : '')],
+            ['安装目录', $base === '' ? '域名根目录' : $base . '/'],
+            ['当前链接', $rewrite ? '伪静态（/archives/1/）' : '带 index.php（/index.php/archives/1/）'],
+            ['PATH_INFO', $pathInfo ? '服务器已传，可直接用伪静态' : '未传，开启伪静态前先补配置'],
+        ];
+
+        $list = '';
+        foreach ($rows as $row) {
+            $list .= '<div class="qq-bk__kv"><span>' . $row[0] . '</span><b>' . $row[1] . '</b></div>';
+        }
+
+        $block = static function (string $title, string $code) {
+            return '<div class="qq-bk__sub">' . $title . '</div>'
+                . '<div class="qq-bk__row">'
+                . '<code class="qq-bk__url" style="flex:1;white-space:pre-wrap">' . htmlspecialchars($code, ENT_QUOTES) . '</code>'
+                . '<button type="button" class="qq-bk-btn" data-qq-copy="' . htmlspecialchars($code, ENT_QUOTES) . '">复制</button>'
+                . '</div>';
+        };
+
+        return '<div class="qq-bk qq-bk--link">'
+            . '<div class="qq-bk__title">站点连接</div>'
+            . '<div class="qq-bk__note">伪静态不是必须的。下面按你当前环境给出可直接粘贴的配置。</div>'
+            . '<div class="qq-bk__grid">' . $list . '</div>'
+            . $block('Nginx（' . ($kind === 'nginx' ? '当前服务器' : '如用 Nginx') . '）', $nginx)
+            . $block('Apache .htaccess', $apache)
+            . '<div class="qq-bk__note" style="margin-top:8px">'
+            . 'Nginx 改完执行 <code>nginx -t</code> 再 reload；Apache 需要 <code>mod_rewrite</code>。'
+            . 'Windows 版 Nginx 不支持 unix socket，<code>fastcgi_pass</code> 用 127.0.0.1:端口。'
+            . '</div>'
+            . '</div>';
+    }
     public static function asset(string $path): string
     {
         $path = ltrim($path, '/');
