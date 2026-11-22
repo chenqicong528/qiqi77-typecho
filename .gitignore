@@ -21,3 +21,20 @@ config.local.php
 *.key
 *.pem
 .panel_passkeys*
+
+# 运行时产物
+cache/
+tmp/
+*.log
+*.sqlite
+*.sqlite-journal
+
+# 站点数据（主题仓库不该有）
+usr/uploads/
+usr/local.sqlite
+config.inc.php
+
+# 本地备份
+*.bak
+*.bak-*
+backup*/

@@ -41,7 +41,6 @@ final class Options
         'qq_tag_cloud'         => 'tagCloud',
         'qq_dark_schedule'     => 'brightTime',
         'qq_footer_note'       => 'Footer',
-        'qq_copyright_text'    => 'copy',
         'qq_font_weight'       => 'globalFontWeight',
         'qq_menu_extra'        => 'otherMenu',
         'qq_drawer_footer'     => 'drawerBottom',
@@ -79,14 +78,13 @@ final class Options
         'qq_description'       => ['textarea', '站点简介', '', '用于 SEO description 与侧栏', [], 'basic'],
         'qq_logo_url'          => ['text', '头像地址', '', '留空用主题自带 logo', [], 'basic'],
         'qq_favicon_url'       => ['text', '站点图标', '', '支持绝对地址', [], 'basic'],
-        'qq_copyright_text'    => ['text', '版权文案', 'All Rights Reserved', '支持 {year} {site} {name}', [], 'basic'],
         'qq_footer_note'       => ['text', '页脚说明', '', '显示在页脚顶部', [], 'basic'],
         'qq_uptime_since'      => ['text', '建站日期', '', '侧栏「本站已硬撑」的起算日，留空不显示', [], 'basic'],
         'qq_icp_number'        => ['text', 'ICP 备案号', '', '页脚展示并链接到工信部', [], 'basic'],
         'qq_police_number'     => ['text', '公安备案号', '', '例如 粤公网安备 440xxxxxxx 号', [], 'basic'],
         'qq_moe_number'        => ['text', '萌 ICP 备案号', '', '留空不显示', [], 'basic'],
         'qq_contact_email'     => ['text', '侵权联系邮箱', '', '页脚显示「侵权删除请联系」，留空不显示', [], 'basic'],
-        'qq_wechat_qr'         => ['text', '微信搜一搜二维码', '', '图片地址，留空则不显示', [], 'basic'],
+        'qq_wechat_qr'         => ['text', '微信搜一搜二维码', 'https://xgjalbum.oss-cn-hangzhou.aliyuncs.com/_oss/6af87ebc7aa179082d257c62/album_app_image/3bddc5a5_1795169501049.jpg', '图片地址，留空则不显示', [], 'basic'],
 
         /* ---------- 外观 ---------- */
         'qq_accent_color'      => ['text', '主题色', '#ff4081', '任意 CSS 颜色，例如 #ff4081', [], 'look', 'color'],
@@ -115,8 +113,8 @@ final class Options
         /* ---------- 文章 ---------- */
         'qq_reading_pct'       => ['select', '阅读进度百分比', 'on', '右上角显示正文阅读进度', ['on' => '开', 'off' => '关'], 'post'],
         'qq_toc_fallback'      => ['select', '目录策略', 'auto', '文章未单独设置时使用', ['auto' => '标题≥3 才显示', 'true' => '总是显示', 'off' => '关闭'], 'post'],
-        'qq_reward_wechat'     => ['text', '微信赞赏码', '', '图片地址，留空不显示打赏', [], 'post'],
-        'qq_reward_alipay'     => ['text', '支付宝赞赏码', '', '图片地址', [], 'post'],
+        'qq_reward_wechat'     => ['text', '微信赞赏码', 'https://xgjalbum.oss-cn-hangzhou.aliyuncs.com/_oss/6af87ebc7aa179082d257c62/album_app_image/8ac82a61_1795171148426.webp', '图片地址，留空不显示打赏', [], 'post'],
+        'qq_reward_alipay'     => ['text', '支付宝赞赏码', 'https://xgjalbum.oss-cn-hangzhou.aliyuncs.com/_oss/6af87ebc7aa179082d257c62/album_app_image/cea069b2_1795171148135.webp', '图片地址', [], 'post'],
         'qq_code_copy'         => ['select', '代码块复制按钮', 'on', '', ['on' => '开', 'off' => '关'], 'post'],
 
         /* ---------- 评论 ---------- */
@@ -124,7 +122,7 @@ final class Options
         'qq_avatar_source'     => ['select', '头像来源', 'qq', '', ['qq' => '优先 QQ 头像', 'gravatar' => '优先 Gravatar'], 'comment'],
         'qq_avatar_cdn'        => ['text', 'Gravatar 镜像', 'https://dn-qiniu-avatar.qbox.me/avatar/', '', [], 'comment'],
         'qq_comment_page'      => ['text', '评论每页条数', '20', '', [], 'comment', 'range:5:50'],
-        'qq_reward_qq'        => ['text', 'QQ 赞赏码', '', '图片地址', [], 'post'],
+        'qq_reward_qq'        => ['text', 'QQ 赞赏码', 'https://xgjalbum.oss-cn-hangzhou.aliyuncs.com/_oss/6af87ebc7aa179082d257c62/album_app_image/2c76c374_1795171148578.webp', '图片地址', [], 'post'],
 
         /* ---------- 抽屉 ---------- */
         'qq_drawer_contacts'   => ['textarea', '社交链接', '', 'JSON：{"qq":"号码","github":"用户名"}，用下方勾选面板生成', [], 'drawer', 'socials'],
@@ -134,9 +132,9 @@ final class Options
         'qq_sidebar_cover'     => ['text', '侧栏封面图', '', '资料卡顶部那张图', [], 'drawer'],
 
         /* ---------- 高级 ---------- */
-        'qq_baidu_token'      => ['text', '百度准入密钥', '', '百度搜索资源平台 → 普通收录 → 推送接口里的 token', [], 'seo'],
+        'qq_baidu_token'      => ['text', '百度准入密钥', 'ZY1qs5xnGOpiiMXR', '百度搜索资源平台 → 普通收录 → 推送接口里的 token', [], 'seo'],
         'qq_baidu_auto'       => ['select', '发布自动推送', 'on', '新文章发布后自动推一条给百度', ['on' => '开', 'off' => '关'], 'seo'],
-        'qq_clarity_id'        => ['text', 'Clarity 项目 ID', '', '留空则不加载微软统计', [], 'seo'],
+        'qq_clarity_id'        => ['text', 'Clarity 项目 ID', 'wz8lxlamw3', '留空则不加载微软统计', [], 'seo'],
         'qq_asset_origin'      => ['select', '静态资源来源', 'local', '', ['local' => '本地文件', 'cloud' => 'BootCDN'], 'adv'],
         'qq_image_host_switch' => ['select', '图片域名替换', 'off', '', ['on' => '开', 'off' => '关'], 'adv'],
         'qq_image_host_target' => ['text', '替换为', '', '例如 https://cdn.example.com', [], 'adv'],
@@ -167,7 +165,7 @@ final class Options
         'qq_search_ph'         => ['text', '搜索框提示', '搜索一下…', '顶栏搜索框的占位文字', [], 'copy'],
         'qq_404_title'         => ['text', '404 标题', '页面走丢了', '', [], 'copy'],
         'qq_404_desc'          => ['text', '404 说明', '链接可能失效了，试试下面的搜索或者回首页', '', [], 'copy'],
-        'qq_watermark_text'    => ['text', '页面水印文字', 'qiqi77', '铺在背景上的浅色斜水印，留空关闭', [], 'copy'],
+        'qq_watermark_text'    => ['text', '页面水印文字', 'Qicong 柒葱', '铺在背景上的浅色斜水印，留空关闭', [], 'copy'],
     ];
 
     private static ?array $data = null;

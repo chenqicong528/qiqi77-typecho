@@ -11,7 +11,7 @@
 [![License](https://img.shields.io/badge/License-MIT-2ea44f?style=flat-square)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/chenqicong528/qiqi77-typecho?style=flat-square&color=ff4081)](../../releases)
 
-[快速开始](#快速开始) · [安装](docs/install.md) · [伪静态](docs/rewrite.md) · [设置](docs/settings.md) · [定制](docs/customize.md) · [FAQ](docs/faq.md)
+[快速开始](#快速开始) · [安装](docs/install.md) · [伪静态](docs/rewrite.md) · [设置](docs/settings.md) · [定制](docs/customize.md) · [FAQ](docs/faq.md) · [仓库约定](docs/repo.md)
 
 </div>
 
@@ -27,7 +27,7 @@ qiqi77 是给 [Typecho](https://typecho.org) 写的一套主题。装好之后�
 
 后台 **50 多项**可调，分 10 组，带搜索和滑块。拿不准的项保持默认，留空的项会自动回落到默认值。
 
-> 演示站：<https://qicong.zqhope.cn>
+> 演示站：<https://666.zqhope.cn> ｜ 作者博客：<https://qicong.zqhope.cn>
 
 ---
 

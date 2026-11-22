@@ -18,7 +18,6 @@ $siteUrl = rtrim((string) \Helper::options()->siteUrl, '/');
 $siteName = trim((string) \Helper::options()->title);
 
 $footerText = trim((string) Options::get('qq_footer_note', ''));
-$copyRaw = trim((string) Options::get('qq_copyright_text', ''));
 /* 不传 fallback：让 SCHEMA 的默认地址生效 */
 
 
@@ -73,7 +72,7 @@ $copyHtml = 'Copyright © 2017–' . $year . ' 柒葱 · All Rights Reserved';
       </p>
       <?php endif; ?>
       <p class="qq-footer__meta">
-        <span>Theme <a href="https://github.com/chenqicong528/qiqi77-typecho" target="_blank" rel="noopener">qiqi77</a> by <a href="https://qicong.zqhope.cn/" target="_blank" rel="noopener">柒葱</a></span>
+        <span>Theme <a href="https://github.com/chenqicong528/qiqi77-typecho" target="_blank" rel="noopener">qiqi77</a> by <a href="https://github.com/chenqicong528" target="_blank" rel="noopener">柒葱</a></span>
         <i class="qq-footer__dot"></i>
         <span>Powered by <a href="https://www.typecho.org/" target="_blank" rel="noopener">Typecho</a></span>
       </p>
