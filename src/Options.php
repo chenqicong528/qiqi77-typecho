@@ -315,17 +315,59 @@ final class Options
     {
         return self::siteBase() . '/usr/themes/' . basename(dirname(__DIR__));
     }
-    /** 独立页面地址（跟随 Typecho 路由与伪静态设置） */
-    public static function pageUrl(string $slug): string
+
+    public static function origin(): string
+    {
+        $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+            || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https')
+            || ((int) ($_SERVER['SERVER_PORT'] ?? 0) === 443);
+        $host = (string) ($_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? '');
+        return ($https ? 'https://' : 'http://') . $host . self::siteBase();
+    }
+
+    /** 读 Typecho 路由表里的格式，拼出路径（/archives/6/） */
+    private static function routePath(string $name, array $params): string
     {
         try {
-            return (string) \Typecho\Router::url('page', ['slug' => $slug], (string) \Helper::options()->index);
+            $route = \Typecho\Router::get($name);
+            if (!$route || empty($route['format'])) {
+                return '';
+            }
+            $values = [];
+            foreach (($route['params'] ?? []) as $key => $param) {
+                $pname = is_array($param) ? (string) ($param['name'] ?? '') : (string) $param;
+                if ($pname === '') {
+                    $pname = (string) $key;
+                }
+                $values[$pname] = (string) ($params[$pname] ?? '');
+            }
+            return (string) vsprintf((string) $route['format'], $values);
         } catch (\Throwable $e) {
-            return self::url('/' . $slug . '.html');
+            return '';
         }
     }
 
-    /** 站长头像：查第一个用户的邮箱，QQ 邮箱走 QQ 头像 */
+    /** 文章地址 */
+    public static function postUrl(int $cid): string
+    {
+        $p = self::routePath('post', ['cid' => $cid]);
+        return rtrim((string) \Helper::options()->index, '/') . ($p !== '' ? $p : '/archives/' . $cid . '/');
+    }
+
+    /** 分类地址 */
+    public static function catUrl(string $slug): string
+    {
+        $p = self::routePath('category', ['slug' => $slug]);
+        return rtrim((string) \Helper::options()->index, '/') . ($p !== '' ? $p : '/category/' . rawurlencode($slug) . '/');
+    }
+
+    /** 独立页面地址 */
+    public static function pageUrl(string $slug): string
+    {
+        $p = self::routePath('page', ['slug' => $slug]);
+        return rtrim((string) \Helper::options()->index, '/') . ($p !== '' ? $p : '/' . $slug . '.html');
+    }
+    /** 站长头像：Typecho 第一个用户的邮箱，QQ 邮箱走 QQ 头像 */
     public static function ownerAvatar(): string
     {
         static $cache = null;
@@ -342,26 +384,6 @@ final class Options
         }
         $cache = \qiqi77\Comment\Avatar::resolve('', $mail, (string) \Helper::options()->title);
         return $cache;
-    }
-
-    /** 文章地址（跟随路由与伪静态） */
-    public static function postUrl(int $cid): string
-    {
-        try {
-            return (string) \Typecho\Router::url('post', ['cid' => $cid], (string) \Helper::options()->index);
-        } catch (\Throwable $e) {
-            return self::url('/archives/' . $cid . '/');
-        }
-    }
-
-    /** 分类地址 */
-    public static function catUrl(string $slug): string
-    {
-        try {
-            return (string) \Typecho\Router::url('category', ['slug' => $slug], (string) \Helper::options()->index);
-        } catch (\Throwable $e) {
-            return self::url('/category/' . rawurlencode($slug) . '/');
-        }
     }
 
     public static function asset(string $path): string

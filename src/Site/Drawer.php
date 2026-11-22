@@ -15,16 +15,16 @@ final class Drawer
 {
     /** 社交平台 → URL 前缀（旧站抽屉里支持的九种） */
     private const SOCIAL_BASE = [
-        'qq'            => '//wpa.qq.com/msgrd?v=3&site=qq&menu=yes&uin=',
-        'weibo'         => '//weibo.com/',
-        'bilibili'      => '//space.bilibili.com/',
-        'github'        => '//github.com/',
-        'twitter'       => '//twitter.com/',
-        'telegram'      => '//t.me/',
+        'qq'            => 'https://wpa.qq.com/msgrd?v=3&site=qq&menu=yes&uin=',
+        'weibo'         => 'https://weibo.com/',
+        'bilibili'      => 'https://space.bilibili.com/',
+        'github'        => 'https://github.com/',
+        'twitter'       => 'https://twitter.com/',
+        'telegram'      => 'https://t.me/',
         'email'         => 'mailto:',
-        'netease-music' => '//music.163.com/#/user/home?id=',
-        'zhihu'         => '//www.zhihu.com/people/',
-        'douyin'        => '//v.douyin.com/',
+        'netease-music' => 'https://music.163.com/#/user/home?id=',
+        'zhihu'         => 'https://www.zhihu.com/people/',
+        'douyin'        => 'https://v.douyin.com/',
     ];
 
     public function __construct(private Db $db)

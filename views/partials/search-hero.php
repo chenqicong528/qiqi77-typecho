@@ -37,11 +37,13 @@ $picks = [];
 if ($total === 0) {
     try {
         $db = \Typecho\Db::get();
+        /* 取最近 12 篇再打乱，避免 RAND() 只支持 MySQL */
         $rows = $db->fetchAll($db->select('cid', 'title')->from('table.contents')
             ->where('type = ?', 'post')->where('status = ?', 'publish')
-            ->order('RAND()')->limit(3));
-        foreach ($rows as $row) {
-            $picks[] = ['title' => (string) $row['title'], 'url' => '/' . (int) $row['cid']];
+            ->order('created', \Typecho\Db::SORT_DESC)->limit(12));
+        shuffle($rows);
+        foreach (array_slice($rows, 0, 3) as $row) {
+            $picks[] = ['title' => (string) $row['title'], 'url' => \qiqi77\Options::postUrl((int) $row['cid'])];
         }
     } catch (\Throwable $e) {
     }
