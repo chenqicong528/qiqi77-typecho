@@ -27,7 +27,7 @@ qiqi77 是给 [Typecho](https://typecho.org) 写的一套主题。装好之后�
 
 后台 **50 多项**可调，分 10 组，带搜索和滑块。拿不准的项保持默认，留空的项会自动回落到默认值。
 
-> 演示站：<https://666.zqhope.cn> ｜ 作者博客：<https://qicong.zqhope.cn>
+> 演示站：<https://qicong.zqhope.cn>
 
 ---
 
