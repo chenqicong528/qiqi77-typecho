@@ -83,9 +83,12 @@
 
 ### 11. sitemap.xml 打开是 404
 
-**原因**：服务器没有把 `/sitemap.xml` 重写到主题的 sitemap 生成逻辑。
+**原因**：主题不直接生成 sitemap，需要把附带的脚本放到站点根目录。
 
-**怎么办**：qiqi77 的 sitemap 由站点根目录的 `sitemap.php` 提供（不是主题目录）。确认根目录有 `sitemap.php`，且 `.htaccess` 里有：
+**怎么办**：把主题目录里的 `extras/sitemap.php` 复制到站点根（与 `index.php` 同级）。放好后：
+
+- 直接访问 `/sitemap.php` 即可看到 XML
+- 想让 `/sitemap.xml` 也能访问，加一条重写规则：
 
 ```apache
 RewriteRule ^sitemap\.xml$ /sitemap.php [L]

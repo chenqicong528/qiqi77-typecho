@@ -546,7 +546,9 @@ final class Options
                 . '">' . $label . '</a>';
         };
 
-        $info = '文章 ' . $count . ' 篇 · sitemap 每次发文自动刷新'
+        $hasSitemap = is_file(__TYPECHO_ROOT_DIR__ . '/sitemap.xml') || is_file(__TYPECHO_ROOT_DIR__ . '/sitemap.php');
+        $info = '文章 ' . $count . ' 篇'
+            . ($hasSitemap ? ' · sitemap 已就绪' : ' · 未检测到 sitemap.xml，把 extras/sitemap.php 放到站点根即可')
             . ($newest ? ' · 最近更新 ' . date('m-d H:i', $newest) : '');
 
         return '<div class="qq-bk qq-bk--search">'

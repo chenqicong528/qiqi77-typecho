@@ -60,7 +60,7 @@ qiqi77 是给 [Typecho](https://typecho.org) 写的一套主题。装好之后�
 
 - **50+ 项后台配置**：分 10 组，左侧导航 + 搜索 + 一键恢复默认
 - **配置备份**：一键存/取，存在数据库，换主题不丢
-- **动态 sitemap**：`/sitemap.xml` 实时生成，按访问域名输出
+- **sitemap**：附带 `extras/sitemap.php`，放到站点根即可输出 `/sitemap.xml`
 - **百度推送**：新文自动推，按每日配额截断，不浪费额度
 - **SEO**：结构化数据、Open Graph、canonical、各站验证码
 - **自定义代码**：CSS / JS / 页头 / 页脚四个注入位
@@ -183,6 +183,7 @@ qiqi77/
 ├── page.php               # 独立页面
 ├── 404.php                # 404
 ├── tpl-*.php              # 自定义模板（归档、友链、在线、统计）
+├── extras/                # 站点根用的附加脚本（sitemap.php）
 ├── src/                   # PHP 类
 │   ├── Options.php        # 配置定义 + 设置页渲染
 │   ├── Bootstrap.php      # 初始化、配置迁移
