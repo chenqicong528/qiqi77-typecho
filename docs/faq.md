@@ -183,3 +183,5 @@ location = /sitemap.xml {
 3. 用了反向代理（把 `/blog/` 重写到根）的，v1.0.2 起也能识别，它会对一遍 `DOCUMENT_ROOT` 和程序目录
 
 > 只修资源是治标。文章链接、sitemap、canonical 都依赖站点地址，能改对就改对。
+
+> 配置 Nginx / Apache 伪静态与 PATH_INFO，见 [伪静态配置](rewrite.md)。

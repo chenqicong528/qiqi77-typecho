@@ -11,7 +11,7 @@
 [![License](https://img.shields.io/badge/License-MIT-2ea44f?style=flat-square)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/chenqicong528/qiqi77-typecho?style=flat-square&color=ff4081)](../../releases)
 
-[快速开始](#快速开始) · [安装](docs/install.md) · [设置](docs/settings.md) · [定制](docs/customize.md) · [FAQ](docs/faq.md)
+[快速开始](#快速开始) · [安装](docs/install.md) · [伪静态](docs/rewrite.md) · [设置](docs/settings.md) · [定制](docs/customize.md) · [FAQ](docs/faq.md)
 
 </div>
 

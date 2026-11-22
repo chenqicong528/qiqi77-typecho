@@ -209,4 +209,11 @@ DELETE FROM typecho_options WHERE name LIKE 'theme:qiqi77%';
 
 ---
 
+## 装完先配伪静态
+
+漂亮链接依赖服务器的 PATH_INFO 支持。只开 Typecho 后台开关是不够的，Nginx 配置见 [伪静态配置](rewrite.md)。
+
+子目录安装（`/blog/`、`/a111/`、`/123/32/23/`）无需改主题代码，按文档替换路径前缀即可。
+
+
 装好了？接着看 [设置说明](settings.md)，把主题调成你想要的样子。
