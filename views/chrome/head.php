@@ -104,7 +104,10 @@ $wmDark = $wmSvg($wmText, 'rgba(255,255,255,0.035)');
 <?php
 $fav = trim((string) Options::get('qq_favicon_url'));
 if ($fav === '') {
-    $fav = Options::themeBase() . '/assets/images/favicon.ico';
+    /* 默认用站点根的 /favicon.ico；没有就用主题自带的那张 */
+    $fav = is_file(__TYPECHO_ROOT_DIR__ . '/favicon.ico')
+        ? Options::siteBase() . '/favicon.ico'
+        : Options::themeBase() . '/assets/images/favicon.ico';
 } elseif (str_starts_with($fav, '/')) {
     $fav = Options::siteBase() . $fav;
 }

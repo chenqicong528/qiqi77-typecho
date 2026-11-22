@@ -22,6 +22,11 @@ $copyRaw = trim((string) Options::get('qq_copyright_text', ''));
 /* 不传 fallback：让 SCHEMA 的默认地址生效 */
 
 
+$wechatQr = trim((string) Options::get('qq_wechat_qr', ''));
+$contactEmail = trim((string) Options::get('qq_contact_email', ''));
+$moe = trim((string) Options::get('qq_moe_number', ''));
+$icp = trim((string) Options::get('qq_icp_number', ''));
+$police = trim((string) Options::get('qq_police_number', ''));
 /* 备案号里的数字串，用来拼查询链接 */
 $digits = static function (string $str): string {
     return preg_match('/\d+/', $str, $m) ? $m[0] : '';
@@ -39,6 +44,34 @@ $copyHtml = 'Copyright © 2017–' . $year . ' 柒葱 · All Rights Reserved';
 
       
       
+      <?php if ($wechatQr !== ''): ?>
+      <div class="qq-footer__qr">
+        <img src="<?php echo Html::e($wechatQr); ?>"
+             alt="微信搜一搜" loading="lazy" decoding="async"
+             referrerpolicy="no-referrer">
+      </div>
+      <?php endif; ?>
+
+      <?php if ($contactEmail !== ''): ?>
+      <p class="qq-footer__contact">
+        <span>侵权删除请联系</span>
+        <a href="mailto:<?php echo Html::e($contactEmail); ?>"><?php echo Html::e($contactEmail); ?></a>
+      </p>
+      <?php endif; ?>
+
+      <?php if ($moe !== '' || $icp !== '' || $police !== ''): ?>
+      <p class="qq-footer__badges">
+        <?php if ($moe !== ''): ?>
+        <a href="https://icp.gov.moe/?keyword=<?php echo Html::e($digits($moe)); ?>" target="_blank" rel="noopener nofollow">萌ICP备<?php echo Html::e($digits($moe)); ?>号</a>
+        <?php endif; ?>
+        <?php if ($icp !== ''): ?>
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener nofollow"><?php echo Html::e($icp); ?></a>
+        <?php endif; ?>
+        <?php if ($police !== ''): ?>
+        <a href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=<?php echo Html::e($digits($police)); ?>" target="_blank" rel="noopener nofollow"><?php echo Html::e($police); ?></a>
+        <?php endif; ?>
+      </p>
+      <?php endif; ?>
       <p class="qq-footer__meta">
         <span>Theme <a href="https://github.com/chenqicong528/qiqi77-typecho" target="_blank" rel="noopener">qiqi77</a> by <a href="https://qicong.zqhope.cn/" target="_blank" rel="noopener">柒葱</a></span>
         <i class="qq-footer__dot"></i>
