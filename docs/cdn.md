@@ -10,7 +10,7 @@
 
 | 方式 | 地址形态 | 要不要发 npm | 国内速度 | 适合 |
 |---|---|---|---|---|
-| **unpkg** | `https://unpkg.com/qiqi77-typecho@1.0.0/assets/...` | 要 | 慢，时常连不上 | 海外站、给国外用户看 |
+| **unpkg** | `https://unpkg.com/qiqi77-typecho@1.0.0/assets/...` | 要 | 慢，时常连不上 | 海外站、给国外用户看。**代码路径已通，但本机没有 npm 账号，未实际发布验证** |
 | **jsDelivr（npm）** | `https://cdn.jsdelivr.net/npm/qiqi77-typecho@1.0.0/assets/...` | 要 | 一般，有国内节点 | 兼顾国内外 |
 | **jsDelivr（GitHub）** | `https://cdn.jsdelivr.net/gh/chenqicong528/qiqi77-typecho@v1.0.0/assets/...` | **不要** | 一般 | **已实测 118/118 可用**，不想折腾 npm 就走这条 |
 | **BootCDN** | 各家库的官方地址 | 不要 | 快 | 只换第三方库，主题自己的 css/js 还走本地 |
@@ -220,6 +220,20 @@ node tools/cdn-check.js https://cdn.jsdelivr.net/gh/chenqicong528/qiqi77-typecho
 通过 118 / 118
 全部命中。
 ```
+
+再在一台真实的 Typecho 1.3 + PHP 8.3 站点上切到 CDN 模式跑了一遍：
+
+| 检查项 | 结果 |
+|---|---|
+| `Options.php` 语法（`token_get_all` + `TOKEN_PARSE`） | 通过 |
+| 首页 HTTP 状态 | 200，无 500 |
+| 生成的资源地址 | 12 个，格式全部正确 |
+| 12 个 CDN 地址逐个请求 | 12 / 12 = 200 |
+| `app.css` 本地与 CDN 的 md5 | 一致（73587 字节） |
+| 无头浏览器渲染 | 卡片、封面、毛玻璃、字体全部正常，无样式丢失 |
+| 切回 `local` 后 | 0 个 CDN 引用，回到本地路径 |
+
+**这一步暴露了一个必须知道的事**：第一次截图时页面是裸 HTML —— 因为无头浏览器没走代理，直连 jsDelivr 拿不到 CSS。换成走代理后立刻正常。这说明 CDN 挂了页面就完全没样式，不会降级。国内访客遇到这种情况的概率不低，这也是为什么默认值必须是 `local`。
 
 顺带清掉了一个被 git 跟踪的备份文件 `assets/css/sidebar-old.css.bak`。它没被任何 CSS 引用，留在仓库里只会被 `files: ["assets/"]` 一起打进 npm 包。
 
