@@ -35,7 +35,7 @@ View::show('chrome/head', ['archive' => $this, 'ctx' => $ctx]);
     <div class="qq-archive-head">
       <span class="qq-archive-head__label">实时</span>
       <h1 class="qq-archive-head__title">在线访客</h1>
-      <p class="qq-archive-head__count"><span class="qq-dot"></span>当前 <?php echo (int) $live['total']; ?> 人在线</p>
+      <p class="qq-archive-head__count"><span class="qq-dot"></span><span data-qq-online-count>当前 <?php echo (int) $live['total']; ?> 人在线</span></p>
     </div>
 
     <section class="qq-metrics">
@@ -87,7 +87,7 @@ View::show('chrome/head', ['archive' => $this, 'ctx' => $ctx]);
         </li>
         <?php endforeach; ?>
         <?php if (!$visitors): ?>
-        <li class="qq-live__empty">
+        <li class="qq-live__empty" data-qq-online-empty>
           <p>现在还没有人在线</p>
           <span>安静得只剩下你和我</span>
         </li>

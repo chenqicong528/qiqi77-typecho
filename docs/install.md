@@ -209,6 +209,17 @@ DELETE FROM typecho_options WHERE name LIKE 'theme:qiqi77%';
 
 ---
 
+---
+
+## 可选：启用在线访客 / sitemap
+
+主题只负责显示，数据由站点根目录的脚本提供：
+
+1. `extras/online.php` → 复制到站点根，并建 4 张表（SQL 见 [extras/README](../extras/README.md)）
+2. `extras/sitemap.php` → 复制到站点根，访问 `/sitemap.php` 验证
+
+不放也能正常用主题，只是「在线访客」会一直是 0、`/sitemap.xml` 会 404。
+
 ## 装完先配伪静态
 
 漂亮链接依赖服务器的 PATH_INFO 支持。只开 Typecho 后台开关是不够的，Nginx 配置见 [伪静态配置](rewrite.md)。

@@ -478,6 +478,23 @@
       put('[data-qq-on-today]', d.today.uniques);
       put('[data-qq-on-views]', d.today.views);
     }
+
+    /* 在线页的标题计数 */
+    var head = document.querySelector('[data-qq-online-count]');
+    if (head && d.total !== undefined) {
+      head.textContent = '当前 ' + d.total + ' 人在线';
+    }
+
+    /* 页面渲染时没人、心跳后有了自己：刷一次，让列表出现 */
+    if (d.total > 0 && document.querySelector('[data-qq-online-empty]')) {
+      var key = 'qq_online_reload';
+      var last = 0;
+      try { last = parseInt(sessionStorage.getItem(key) || '0', 10) || 0; } catch (e) {}
+      if (Date.now() - last > 30000) {
+        try { sessionStorage.setItem(key, String(Date.now())); } catch (e) {}
+        location.reload();
+      }
+    }
   }
 
   function ping(isPv) {

@@ -69,7 +69,7 @@ $surfaceCss = $surfA >= 100
     : 'color-mix(in srgb, ' . $cSurface . ' ' . $surfA . '%, transparent)';
 
 /* 水印：把文字塞进 SVG，浅色/深色各一份 */
-$wmText = trim((string) Options::get('qq_watermark_text', 'qiqi77'));
+$wmText = trim((string) Options::get('qq_watermark_text', 'Qicong 柒葱'));
 $wmSvg = static function (string $text, string $fill): string {
     if ($text === '') {
         return '';
@@ -180,7 +180,7 @@ if ($fav === '') {
 <?php endif; ?>
 <?php echo (string) Options::get('qq_inject_head', ''); ?>
 <?php $onlineEp = is_file(__TYPECHO_ROOT_DIR__ . '/online.php') ? Options::siteBase() . '/online.php' : ''; ?>
-<script>window.QQ_BASE = <?php echo json_encode(Options::siteBase(), JSON_UNESCAPED_SLASHES); ?>; window.QQ_ONLINE = <?php echo json_encode($onlineEp, JSON_UNESCAPED_SLASHES); ?>;</script>
+<script nonce="<?php echo defined('QQ_NONCE') ? QQ_NONCE : ''; ?>">window.QQ_BASE = <?php echo json_encode(Options::siteBase(), JSON_UNESCAPED_SLASHES); ?>; window.QQ_ONLINE = <?php echo json_encode($onlineEp, JSON_UNESCAPED_SLASHES); ?>;</script>
 </head>
 <body class="qq-body">
 <?php if ($showSplash): ?>
