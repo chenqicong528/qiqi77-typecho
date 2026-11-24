@@ -1,0 +1,35 @@
+{
+  "name": "qiqi77-typecho",
+  "version": "1.0.0",
+  "description": "柒葱 Typecho 主题的静态资源包：CSS / JS / 字体 / 图标。发到 npm 后可直接经 unpkg、jsDelivr 或任意 npm 镜像引用。",
+  "license": "MIT",
+  "author": "chenqicong528",
+  "homepage": "https://github.com/chenqicong528/qiqi77-typecho",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenqicong528/qiqi77-typecho.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chenqicong528/qiqi77-typecho/issues"
+  },
+  "keywords": [
+    "typecho",
+    "typecho-theme",
+    "theme",
+    "qiqi77",
+    "assets",
+    "cdn"
+  ],
+  "files": [
+    "assets/"
+  ],
+  "unpkg": "assets/css/app.css",
+  "jsdelivr": "assets/css/app.css",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}

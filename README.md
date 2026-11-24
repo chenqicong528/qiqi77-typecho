@@ -11,7 +11,7 @@
 [![License](https://img.shields.io/badge/License-MIT-2ea44f?style=flat-square)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/chenqicong528/qiqi77-typecho?style=flat-square&color=ff4081)](../../releases)
 
-[快速开始](#快速开始) · [安装](docs/install.md) · [伪静态](docs/rewrite.md) · [设置](docs/settings.md) · [定制](docs/customize.md) · [FAQ](docs/faq.md) · [仓库约定](docs/repo.md)
+[快速开始](#快速开始) · [安装](docs/install.md) · [伪静态](docs/rewrite.md) · [设置](docs/settings.md) · [定制](docs/customize.md) · [CDN](docs/cdn.md) · [FAQ](docs/faq.md) · [仓库约定](docs/repo.md)
 
 </div>
 
@@ -64,6 +64,7 @@ qiqi77 是给 [Typecho](https://typecho.org) 写的一套主题。装好之后�
 - **百度推送**：新文自动推，按每日配额截断，不浪费额度
 - **SEO**：结构化数据、Open Graph、canonical、各站验证码
 - **自定义代码**：CSS / JS / 页头 / 页脚四个注入位
+- **静态资源 CDN**：本地 / BootCDN / npm CDN（unpkg、jsDelivr）三档，后台一个下拉切换
 
 ---
 
@@ -199,6 +200,11 @@ qiqi77/
 │   ├── css/               # 9 个源文件 → 合成 app.css
 │   ├── js/                # 交互
 │   └── images/            # 默认图
+├── tools/                 # 发版与检查脚本（不进主题包）
+│   ├── publish-npm.sh     # assets 发 npm
+│   └── cdn-check.js       # 逐文件验证 CDN 可达
+├── package.json           # npm 包声明，只含 assets/
+├── .npmignore
 └── docs/                  # 文档与截图
 ```
 
@@ -219,6 +225,8 @@ qiqi77/
 | 第三方 PHP 依赖 | 无 |
 
 优化点：图片懒加载、PJAX 减少重复请求、CSS 变量避免重复声明。
+
+静态资源可以从 CDN 出。后台「静态资源来源」三档可切，包已按 npm 规范组织好（`package.json` + `files: assets/`），发一次就能用 `https://unpkg.com/qiqi77-typecho@<版本>/assets/...`。完整流程和踩坑见 [docs/cdn.md](docs/cdn.md)。
 
 ---
 

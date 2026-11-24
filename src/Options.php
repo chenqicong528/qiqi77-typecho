@@ -12,6 +12,9 @@ use Typecho\Db;
 
 final class Options
 {
+    /** npm 包地址，与仓库根 package.json 的 name 保持一致 */
+    public const CDN_PACKAGE = 'https://unpkg.com/qiqi77-typecho';
+
     /** 新键 → 旧键（QiQi 时代的序列化数组键名），只用于读取兼容 */
     private const LEGACY = [
         'qq_description'       => 'describe',
@@ -135,7 +138,9 @@ final class Options
         'qq_baidu_token'      => ['text', '百度准入密钥', 'ZY1qs5xnGOpiiMXR', '百度搜索资源平台 → 普通收录 → 推送接口里的 token', [], 'seo'],
         'qq_baidu_auto'       => ['select', '发布自动推送', 'on', '新文章发布后自动推一条给百度', ['on' => '开', 'off' => '关'], 'seo'],
         'qq_clarity_id'        => ['text', 'Clarity 项目 ID', 'wz8lxlamw3', '留空则不加载微软统计', [], 'seo'],
-        'qq_asset_origin'      => ['select', '静态资源来源', 'local', '', ['local' => '本地文件', 'cloud' => 'BootCDN'], 'adv'],
+        'qq_asset_origin'      => ['select', '静态资源来源', 'local', 'unpkg 需先把 assets 发到 npm，见 docs/cdn.md', ['local' => '本地文件', 'cloud' => 'BootCDN', 'unpkg' => 'npm CDN（unpkg / jsDelivr）'], 'adv'],
+        'qq_cdn_base'          => ['text', 'CDN 包地址', 'https://unpkg.com/qiqi77-typecho', '换 jsDelivr 填 https://cdn.jsdelivr.net/npm/qiqi77-typecho；自建填自己的前缀', [], 'adv'],
+        'qq_cdn_ver'           => ['text', 'CDN 版本号', '1.0.0', '必须与 npm 上已发布版本一致；留空走 latest（不推荐，缓存不可控）', [], 'adv'],
         'qq_image_host_switch' => ['select', '图片域名替换', 'off', '', ['on' => '开', 'off' => '关'], 'adv'],
         'qq_image_host_target' => ['text', '替换为', '', '例如 https://cdn.example.com', [], 'adv'],
         'qq_pjax_scope'        => ['text', 'PJAX 容器', '#qq-shell', '改错会导致热加载失效', [], 'adv'],
@@ -458,12 +463,18 @@ final class Options
             . '</div>'
             . '</div>';
     }
+
     public static function asset(string $path): string
     {
         $path = ltrim($path, '/');
         $base = self::themeBase();
+        $abs  = __DIR__ . '/../assets/' . $path;
 
-        if (self::get('qq_asset_origin', 'local') === 'cloud') {
+        // 本地不存在的文件一律不上 CDN：CDN 上更不会有，换来的只是一条 404
+        $exists = is_file($abs);
+        $origin = (string) self::get('qq_asset_origin', 'local');
+
+        if ($exists && $origin === 'cloud') {
             $cdn = [
                 'js/mdui.min.js'            => 'https://cdn.bootcdn.net/ajax/libs/mdui/1.0.1/js/mdui.min.js',
                 'css/mdui.min.css'          => 'https://cdn.bootcdn.net/ajax/libs/mdui/1.0.1/css/mdui.min.css',
@@ -482,9 +493,22 @@ final class Options
             }
         }
 
-        $abs = __DIR__ . '/../assets/' . $path;
+        if ($exists && $origin === 'unpkg') {
+            $cdn = rtrim(trim((string) self::get('qq_cdn_base', self::CDN_PACKAGE)), '/');
+            if ($cdn === '') {
+                $cdn = self::CDN_PACKAGE;
+            }
+            $ver = ltrim(trim((string) self::get('qq_cdn_ver', '1.0.0')), '@');
+            // 版本位只放行 semver 常用字符，避免用户填了中文或空格拼出畸形 URL
+            if ($ver !== '' && preg_match('/^[0-9A-Za-z.^~<>*\-]+$/', $ver) === 1) {
+                $cdn .= '@' . $ver;
+            }
+            // 不追加 ?v=：CDN 靠版本号做缓存失效，加查询串只会让缓存命中率变差
+            return $cdn . '/assets/' . $path;
+        }
+
         $url = $base . '/assets/' . $path;
-        if (is_file($abs)) {
+        if ($exists) {
             $url .= '?v=' . filemtime($abs);
         }
         return $url;

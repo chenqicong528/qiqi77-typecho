@@ -158,7 +158,9 @@
 
 | 设置 | 说明 |
 |---|---|
-| 静态资源来源 | `local` 用主题自带的文件，`cloud` 走公共 CDN。**国内服务器建议 local** |
+| 静态资源来源 | `local` 用主题自带的文件；`cloud` 把第三方库换到 BootCDN；`unpkg` 全部走 npm CDN。**国内服务器建议 local 或 cloud**，流程见 [CDN](cdn.md) |
+| CDN 包地址 | 仅 `unpkg` 档生效。默认 `https://unpkg.com/qiqi77-typecho`，换 jsDelivr 填 `https://cdn.jsdelivr.net/npm/qiqi77-typecho` |
+| CDN 版本号 | 仅 `unpkg` 档生效。必须与 npm 上已发布的版本一致，否则整站资源 404。留空会走 latest，缓存不可控，不建议 |
 | 图片域名替换 | 把文章里的图片地址批量换到另一个域名（比如自建图床） |
 | 替换为 | 目标域名，例如 `https://cdn.example.com` |
 | PJAX 容器 | 默认 `#qq-shell`，改错会导致无刷新跳转失效 |

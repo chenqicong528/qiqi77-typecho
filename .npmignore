@@ -1,0 +1,14 @@
+# 包内容已在 package.json 的 files 里限定为 assets/，
+# 这里只做二次过滤，防止备份文件混进 npm 包
+*.bak
+*.bak-*
+*.orig
+*.rej
+*.swp
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+node_modules/

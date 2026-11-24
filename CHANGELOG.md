@@ -36,4 +36,6 @@
 
 - 资源与站内链接全部相对化，装在任意层级目录都能跑，不依赖站点地址
 - 页面地址由 Typecho 路由表生成，伪静态开关自动适配
-- 零外部依赖，不需要 CDN
+- 静态资源支持三档来源：本地 / BootCDN / npm CDN（unpkg、jsDelivr），后台下拉切换
+- 仓库带 npm 包声明，`assets/` 发一次即可经 unpkg 引用；`tools/cdn-check.js` 逐文件验证可达
+- 零外部依赖，默认不需要 CDN

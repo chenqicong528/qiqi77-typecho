@@ -13,7 +13,11 @@
 src/                  主题逻辑
 views/                模板片段
 assets/               样式、脚本、字体、图标、默认图
+extras/               站点根用的附加脚本（sitemap、在线统计）
+tools/                发版与检查脚本，不进主题运行时
 docs/                 使用文档与示意截图
+package.json          npm 包声明，只含 assets/
+.npmignore
 README.md
 CHANGELOG.md
 LICENSE
@@ -35,6 +39,7 @@ screenshot.png        仓库首页展示图
 | 上传附件 | `usr/uploads/` | 体积大，与主题无关 |
 | 缓存与临时文件 | 缓存目录、`*.log`、`tmp/` | 每次运行都会变 |
 | 打包产物 | `*.zip`、`*.tar.gz` | 应由 Releases 提供 |
+| 备份文件 | `*.bak`、`*.orig`、`sidebar-old.css.bak` | 没人引用，还会被 npm 包一起带走 |
 | 编辑器与系统文件 | `.idea/`、`.vscode/`、`.DS_Store` | 个人环境相关 |
 
 `.gitignore` 里已经拦住大部分，但**提交前还是要看一眼 `git status`**。
